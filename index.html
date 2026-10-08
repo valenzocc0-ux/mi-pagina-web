@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Links - Estilo Orgánico</title>
+    <!-- Importamos una tipografía sans-serif geométrica similar a la de la imagen -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1e3a5f; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%3C%3Fphp echo urlencode('#f3eada'); %3F%3E' stroke-width='1' stroke-opacity='0.12'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737.5M799 665L833 335.3M150 139L354 136.9M177 451L600 335.3M106 1088L500 762.4M47 279L460 110.8M852 66L792 339.1M700 1250L617 835.6M1335 1049L1041 900.3M438 883L572 661M1170 713L714 965.7M308 585L66 537.5M660 1317L958 767.7M350 116L630 288M237 1477L489 1134M1610 424l-323-182M184 791l415-187.4M165 698l-259 195.7M117 692L44 964.8M510 243l259 195.7M40 1080l323-182M570 622L861 431.3M129 301l323-182M670 113L588 692.7M386 359L599 231.2M600 864l259 195.7M440 1218L861 1317.3M510 475l415-187.4M344 643L379 313.7M350 1092l415-187.4M71 132l415-187.4M44 964l415-187.4M185 1209L769 229'/%3E%3C/g%3E%3C/svg%3E");
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .profile-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #a3c9a3;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #f3eada;
+        }
+
+        .profile-img {
+            width: 80%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .handle {
+            font-size: 0.9rem;
+            color: #f3eada;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-link {
+            display: block;
+            background-color: #f3eada; 
+            color: #1e3a5f;
+            padding: 16px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #e0d9c6;
+        }
+
+        .btn-link:hover {
+            background-color: #e0d9c6;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-circle">
+            ☕
+        </div>
+        
+        <p class="handle">@TuNombreDeUsuario</p>
+
+        <div class="links-list">
+            <a href="#" class="btn-link">Mi Tienda Online</a>
+            <a href="#" class="btn-link">Novedades</a>
+            <a href="#" class="btn-link">Blog Personal</a>
+            <a href="#" class="btn-link">Contacto</a>
+            <a href="#" class="btn-link">Portfolio</a>
+        </div>
+    </div>
+
+</body>
+</html>
