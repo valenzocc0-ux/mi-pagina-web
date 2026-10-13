@@ -12,6 +12,18 @@
       padding: 0;
       box-sizing: border-box;
     }
+    /* Animación de flotación suave */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* Sube 10 píxeles */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
     body {
       font-family: 'Poppins', sans-serif;
       background-image: url('nuevatextura.jpg');
@@ -37,6 +49,8 @@
       padding: 40px 30px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      /* NUEVO: Aplicamos la animación */
+      animation: float 6s ease-in-out infinite;
     }
     .profile-circle {
       width: 110px;
