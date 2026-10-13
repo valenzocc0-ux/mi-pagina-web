@@ -1,29 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentino Zocco - Mis Enlaces</title>
-    <!-- Importamos la tipografía Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentino Zocco Telleria | Portfolio</title>
+  
+  <!-- Fuente Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    /* Animación de flotación suave */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px); /* Sube 10 píxeles */
-  }
-  100% {
-    transform: translateY(0px);
-  }
-* {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -41,58 +29,58 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow: hidden; /* Evita scrolls raros */
-      perspective: 1000px; /* Habilita el espacio 3D */
-      position: relative;
-    }
-.glass-card {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 24px;
-      padding: 40px 30px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      /* NUEVO: Aplicamos la animación */
-      animation: float 6s ease-in-out infinite;
-      .glass-card {
-      position: relative;
-      /* Mantené acá las propiedades que ya tenías: backdrop-filter, border, background, etc. */
+      padding: 20px;
+      perspective: 1000px;
       overflow: hidden;
     }
-    /* Capa de textura analógica esmerilada */
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.04; /* Nivel sutil: entre 0.03 y 0.06 */
-      pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+    /* Tarjeta Glassmorphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 24px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      animation: float 6s ease-in-out infinite;
     }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
     }
+
+    /* Contenedor circular de la foto */
     .profile-circle {
       width: 110px;
       height: 110px;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 15px auto;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 0 20px rgba(0, 150, 255, 0.4);
-      animation: avatarPulse 4s ease-in-out infinite;
+      border: 3px solid rgba(56, 189, 248, 0.7);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
     }
 
-    .profile-img {
+    .profile-circle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block; /* Asegura que la imagen se renderice */
+      display: block;
     }
+
+    /* Nombre / Scramble */
     .handle {
       margin-bottom: 25px;
       font-weight: 600;
+      font-size: 0.95rem;
       letter-spacing: 0.8px;
       cursor: pointer;
       user-select: none;
@@ -100,21 +88,25 @@
     }
 
     .handle:hover {
-      color: #38bdf8; /* Un destello celeste al pasar el mouse */
+      color: #38bdf8;
     }
+
+    /* Lista de enlaces */
     .links-list {
       display: flex;
       flex-direction: column;
       gap: 15px;
       margin-top: 20px;
     }
+
+    /* Botones interactivos */
     .btn-link {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      position: relative;          /* Necesario para posicionar el reflejo */
-      overflow: hidden;            /* Corta el destello fuera de los bordes redondeados */
+      position: relative;
+      overflow: hidden;
       background: #e2ded8;
       color: #111111;
       padding: 14px 20px;
@@ -128,7 +120,11 @@
       will-change: transform;
     }
 
-    /* Haz de luz diagonal invisible al inicio */
+    .btn-link svg {
+      flex-shrink: 0;
+    }
+
+    /* Destello diagonal (Sheen) */
     .btn-link::after {
       content: '';
       position: absolute;
@@ -137,98 +133,56 @@
       width: 40%;
       height: 200%;
       background: linear-gradient(
-        60deg,
+        to right,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.4) 50%,
         rgba(255, 255, 255, 0) 100%
       );
       transform: rotate(25deg);
+      transition: all 0.55s ease;
       pointer-events: none;
-      transition: none;
     }
 
-    /* Al pasar el mouse, el haz cruza rápidamente de izquierda a derecha */
     .btn-link:hover::after {
-      left: 130%;
-      transition: left 0.65s ease-in-out;
+      left: 120%;
     }
 
     .btn-link:hover {
-      background: #ffffff;
-      color: #000000;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      background-color: #f1ede7;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.25);
     }
-    /* ARO CELESTE: solo línea exterior, sin relleno oscuro */
-    .custom-cursor-outline {
-      display: none;
-      width: 24px;
-      height: 24px;
-      background-color: transparent !important; /* Quita la mancha oscura del centro */
-      border: 1.5px solid rgba(56, 189, 248, 0.6);
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9998;
-      transition: transform 0.08s ease-out, width 0.15s ease, height 0.15s ease, border-color 0.15s ease;
-    }
-
-    /* Expansión al pasar sobre botones o nombre */
-    .custom-cursor-outline.hover-active {
-      width: 40px;
-      height: 40px;
-      border-color: rgba(56, 189, 248, 0.95);
-      background-color: transparent !important;
-    }
-    }#particles-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1; /* Detrás de la glass-card */
-    }
-
-    .glass-card {
-      position: relative;
-      z-index: 10; /* Asegura que la tarjeta quede por encima del canvas */
-    }
-</style>
+  </style>
 </head>
 <body>
-<canvas id="particles-canvas"></canvas>
-    <!-- Tarjeta principal de cristal -->
-    <div class="glass-card">
-        <div class="profile-circle">
-            <img src="foto.jpg" alt="Valentino Zocco" class="profile-img">
-        </div>
-        
-        <p class="handle">VALENTINO ZOCCO TELLERIA</p>
 
-       <div class="links-list">
-        <a href="https://www.instagram.com/valenzocco/" class="btn-link" target="_blank" rel="noopener noreferrer">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-          <span>Instagram</span>
-        </a>
+  <div class="glass-card">
+    <div class="profile-circle">
+      <img src="fotoperfil.jpg" alt="Valentino Zocco Telleria" />
+    </div>
 
-        <a href="https://www.linkedin.com/in/valentino-zocco-telleria-24554a30a/?isSelfProfile=true" class="btn-link" target="_blank" rel="noopener noreferrer">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-          </svg>
-          <span>LinkedIn</span>
-        </a>
-      </div>
-      <!-- Puntero interactivo personalizado -->
+    <div class="handle">VALENTINO ZOCCO TELLERIA</div>
 
-<script>
-    /* =========================================================
-       1. EFECTO MAGNÉTICO + TILT 3D EN LOS BOTONES
-       ========================================================= */
+    <div class="links-list">
+      <a href="https://www.instagram.com/valenzocco/" class="btn-link" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        <span>Instagram</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/valentino-zocco-telleria-24554a30a/?isSelfProfile=true" class="btn-link" target="_blank" rel="noopener noreferrer">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    /* 1. EFECTO MAGNÉTICO + TILT 3D */
     const buttons = document.querySelectorAll('.btn-link');
 
     buttons.forEach((btn) => {
@@ -237,11 +191,9 @@
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        // Desplazamiento elástico hacia el cursor
         const pullX = (x / (rect.width / 2)) * 8;
         const pullY = (y / (rect.height / 2)) * 6;
 
-        // Inclinación 3D en los ejes
         const rotateX = -(y / (rect.height / 2)) * 8;
         const rotateY = (x / (rect.width / 2)) * 12;
 
@@ -253,9 +205,7 @@
       });
     });
 
-    /* =========================================================
-       2. EFECTO SCRAMBLE TEXT (DESENCRIPTADO SUAVE)
-       ========================================================= */
+    /* 2. SCRAMBLE TEXT SUAVE */
     const handleEl = document.querySelector('.handle');
     if (handleEl) {
       const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -290,117 +240,10 @@
       setTimeout(runScramble, 800);
     }
 
-    /* =========================================================
-       3. FOCO DE LUZ DEL CURSOR EN EL FONDO
-       ========================================================= */
+    /* 3. LUZ DE LINTERNA DINÁMICA */
     document.addEventListener('mousemove', (e) => {
       document.body.style.backgroundImage = `radial-gradient(circle 220px at ${e.clientX}px ${e.clientY}px, rgba(0, 210, 255, 0.45), transparent 80%), url('nuevatextura.jpg')`;
     });
-    /* =========================================================
-       4. MALLA DE MICROPARTÍCULAS FLOTANTES (CANVAS)
-       ========================================================= */
-    const canvas = document.getElementById('particles-canvas');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      const particleCount = 45; // Cantidad equilibrada para no saturar
-
-      const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      };
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      let mouse = { x: null, y: null, radius: 120 };
-
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      });
-
-      window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-      });
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 1.8 + 0.8;
-          this.baseX = this.x;
-          this.baseY = this.y;
-          this.density = Math.random() * 15 + 1;
-          this.vx = (Math.random() - 0.5) * 0.6;
-          this.vy = (Math.random() - 0.5) * 0.6;
-        }
-
-        draw() {
-          ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.closePath();
-          ctx.fill();
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-
-          if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-          if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-
-          // Reacción suave al puntero
-          if (mouse.x !== null && mouse.y !== null) {
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < mouse.radius) {
-              const force = (mouse.radius - distance) / mouse.radius;
-              const directionX = (dx / distance) * force * this.density * 0.4;
-              const directionY = (dy / distance) * force * this.density * 0.4;
-              this.x -= directionX;
-              this.y -= directionY;
-            }
-          }
-        }
-      }
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-
-      const animateParticles = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].draw();
-          particles[i].update();
-
-          // Conectar con líneas sutiles entre partículas cercanas
-          for (let j = i + 1; j < particles.length; j++) {
-            let dx = particles[i].x - particles[j].x;
-            let dy = particles[i].y - particles[j].y;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < 90) {
-              ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 90)})`;
-              ctx.lineWidth = 0.8;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-              ctx.closePath();
-            }
-          }
-        }
-        requestAnimationFrame(animateParticles);
-      };
-
-      animateParticles();
-    }
   </script>
-</script>
 </body>
 </html>
