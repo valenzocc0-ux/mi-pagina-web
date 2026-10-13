@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Links Personales de contacto-VZ</title>
-    <!-- Importamos una tipografía sans-serif geométrica similar a la de la imagen -->
+    <title>Valentino Zocco - Mis Enlaces</title>
+    <!-- Importamos la tipografía Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,81 +25,112 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
-        .container {
+        /* Animación de entrada para que la tarjeta aparezca flotando */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tarjeta central con efecto cristal (Glassmorphism) */
+        .glass-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.08); /* Fondo semitransparente */
+            backdrop-filter: blur(12px);          /* Efecto esmerilado de fondo */
+            -webkit-backdrop-filter: blur(12px);   /* Compatibilidad con Safari */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Borde sutil brillante */
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Sombra profunda */
+            animation: fadeInUp 0.8s ease-out forwards;  /* Aplica la animación */
         }
 
+        /* Contenedor de la foto con marco elegante */
         .profile-circle {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background-color: #a3c9a3;
             margin: 0 auto 15px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            border: 2px solid #f3eada;
+            border: 3px solid rgba(243, 234, 218, 0.8); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .profile-img {
-            width: 80%;
-            height: auto;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top; 
         }
 
         .handle {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #f3eada;
-            margin-bottom: 40px;
-            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .links-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
+        /* Botones modernos con efecto hover avanzado */
         .btn-link {
             display: block;
-            background-color: #f3eada; 
-            color: #1e3a5f;
+            background-color: rgba(243, 234, 218, 0.9); 
+            color: #0f172a;
             padding: 16px 20px;
-            border-radius: 30px;
+            border-radius: 35px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid #e0d9c6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .btn-link:hover {
-            background-color: #e0d9c6;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background-color: #ffffff;
+            transform: translateY(-4px); /* Se eleva un poquito */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .btn-link:active {
+            transform: translateY(-1px); /* Efecto de presión al hacer clic */
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- Tarjeta principal de cristal -->
+    <div class="glass-card">
         <div class="profile-circle">
-            <img src="foto - copia.jpg" alt="Mi Foto" class="profile-img">
+            <img src="foto.jpg" alt="Valentino Zocco" class="profile-img">
         </div>
         
         <p class="handle">VALENTINO ZOCCO TELLERIA</p>
 
         <div class="links-list">
-            <a href="https://www.instagram.com/valenzocco/" class="btn-link">Instagram</a>
-            <a href="https://www.linkedin.com/in/valentino-zocco-telleria-24554a30a/?isSelfProfile=true" class="btn-link">Linkedin</a>
+            <a href="https://www.instagram.com/valenzoccc" target="_blank" class="btn-link">Instagram</a>
+            <a href="https://www.linkedin.com/in/valentinodzocco" target="_blank" class="btn-link">Linkedin</a>
         </div>
     </div>
 
