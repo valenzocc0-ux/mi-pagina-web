@@ -37,6 +37,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      perspective: 1000px; /* Habilita el espacio 3D */
     }
 .glass-card {
       width: 100%;
@@ -51,6 +52,8 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       /* NUEVO: Aplicamos la animación */
       animation: float 6s ease-in-out infinite;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
     }
     .profile-circle {
       width: 110px;
@@ -114,6 +117,26 @@
             <a href="https://www.linkedin.com/in/valentino-zocco-telleria-24554a30a/?isSelfProfile=true" class="btn-link">Linkedin</a>
         </div>
     </div>
+<script>
+    const card = document.querySelector('.glass-card');
 
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      // Inclinación máxima de 12 grados
+      const rotateX = -(y / (rect.height / 2)) * 12;
+      const rotateY = (x / (rect.width / 2)) * 12;
+
+      card.style.animation = 'none'; // Pausa la flotación mientras interactúas
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.animation = 'float 6s ease-in-out infinite'; // Reanuda la flotación
+    });
+  </script>
 </body>
 </html>
