@@ -174,11 +174,24 @@
       border-color: rgba(56, 189, 248, 0.95);
       background-color: transparent !important;
     }
+    }#particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1; /* Detrás de la glass-card */
+    }
+
+    .glass-card {
+      position: relative;
+      z-index: 2; /* Asegura que la tarjeta quede por encima del canvas */
     }
 </style>
 </head>
 <body>
-
+<canvas id="particles-canvas"></canvas>
     <!-- Tarjeta principal de cristal -->
     <div class="glass-card">
         <div class="profile-circle">
@@ -277,6 +290,110 @@
     document.addEventListener('mousemove', (e) => {
       document.body.style.backgroundImage = `radial-gradient(circle 220px at ${e.clientX}px ${e.clientY}px, rgba(0, 210, 255, 0.45), transparent 80%), url('nuevatextura.jpg')`;
     });
+    /* =========================================================
+       4. MALLA DE MICROPARTÍCULAS FLOTANTES (CANVAS)
+       ========================================================= */
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const particleCount = 45; // Cantidad equilibrada para no saturar
+
+      const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      };
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      let mouse = { x: null, y: null, radius: 120 };
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.8 + 0.8;
+          this.baseX = this.x;
+          this.baseY = this.y;
+          this.density = Math.random() * 15 + 1;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+
+        draw() {
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+
+          if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+          if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+
+          // Reacción suave al puntero
+          if (mouse.x !== null && mouse.y !== null) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < mouse.radius) {
+              const force = (mouse.radius - distance) / mouse.radius;
+              const directionX = (dx / distance) * force * this.density * 0.4;
+              const directionY = (dy / distance) * force * this.density * 0.4;
+              this.x -= directionX;
+              this.y -= directionY;
+            }
+          }
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      const animateParticles = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].draw();
+          particles[i].update();
+
+          // Conectar con líneas sutiles entre partículas cercanas
+          for (let j = i + 1; j < particles.length; j++) {
+            let dx = particles[i].x - particles[j].x;
+            let dy = particles[i].y - particles[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 90) {
+              ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 90)})`;
+              ctx.lineWidth = 0.8;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+              ctx.closePath();
+            }
+          }
+        }
+        requestAnimationFrame(animateParticles);
+      };
+
+      animateParticles();
+    }
   </script>
 </script>
 </body>
