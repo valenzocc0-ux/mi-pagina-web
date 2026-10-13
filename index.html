@@ -196,13 +196,13 @@
         btn.style.transform = 'perspective(500px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1)';
       });
     });
-
-    /* =========================================================
-       2. EFECTO SCRAMBLE TEXT (DESENCRIPTADO) EN EL NOMBRE
+/* =========================================================
+       2. EFECTO SCRAMBLE TEXT (MÁS SUAVE Y PROGRESIVO)
        ========================================================= */
     const handleEl = document.querySelector('.handle');
     if (handleEl) {
-      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+      // Usamos caracteres más sutiles y limpios
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       const originalText = handleEl.innerText;
       let interval = null;
 
@@ -226,15 +226,16 @@
             clearInterval(interval);
           }
 
-          iteration += 1 / 2; // Velocidad del desencriptado
-        }, 30);
+          // Avance más lento: cada letra se resuelve gradualmente
+          iteration += 1 / 4; 
+        }, 45); // Cadencia más pausada (45ms)
       };
 
-      // Se dispara al pasar el mouse por encima
+      // Disparo al pasar el cursor
       handleEl.addEventListener('mouseenter', runScramble);
 
-      // Y también una vez automáticamente al cargar la página
-      setTimeout(runScramble, 600);
+      // Disparo inicial tras cargar la página
+      setTimeout(runScramble, 800);
     }
 
     /* =========================================================
