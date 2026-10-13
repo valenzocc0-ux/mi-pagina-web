@@ -138,58 +138,58 @@
       color: #000000;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
-    /* Ocultar cursor nativo en pantallas con puntero */
+    /* Ocultar el cursor original en pantallas con mouse */
     @media (pointer: fine) {
-      body, a, .handle {
-        cursor: none !important;
+      body, a, .handle, .profile-circle {
+        cursor: none !important; /* Desaparece la flechita tradicional */
       }
       
       .custom-cursor-dot,
       .custom-cursor-outline {
-        display: block;
+        display: block; /* Se muestran los personalizados */
       }
     }
-    /* Puntero personalizado (punto central) */
+
+    /* Puntero personalizado: Puntito Negro */
     .custom-cursor-dot {
       display: none;
       width: 6px;
       height: 6px;
-      background-color: #38bdf8;
+      background-color: #000000; /* Negro absoluto */
       border-radius: 50%;
       position: fixed;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 9999;
-      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.8); /* Pequeño brillo blanco para que no se pierda en el fondo oscuro */
+      transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
     }
 
-    /* Aro elástico que lo sigue */
+    /* Aro elástico original: Celeste */
     .custom-cursor-outline {
       display: none;
-      width: 30px;
-      height: 30px;
-      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      width: 26px;
+      height: 26px;
+      border: 1.5px solid rgba(56, 189, 248, 0.45); /* Celeste translúcido original */
       border-radius: 50%;
       position: fixed;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 9998;
-      /* Se mueve con inercia elástica desde JS */
-      transition: transform 0.08s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.08s ease-out, width 0.15s ease, height 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
     }
 
-    /* Estado expandido cuando pasa por elementos interactivos */
+    /* Estado expandido en elementos interactivos (sobre botones o nombre) */
     .custom-cursor-dot.hover-active {
       width: 4px;
       height: 4px;
-      background-color: #ffffff;
+      background-color: #ffffff; /* Se vuelve blanco para contrastar sobre los botones */
     }
 
     .custom-cursor-outline.hover-active {
-      width: 48px;
-      height: 48px;
-      border-color: rgba(56, 189, 248, 0.8);
-      background-color: rgba(56, 189, 248, 0.08);
+      width: 44px; /* El aro se agranda */
+      border-color: rgba(56, 189, 248, 0.9); /* Celeste más brillante */
+      background-color: rgba(56, 189, 248, 0.08); /* Sombra/Relleno celeste suave */
     }
 </style>
 </head>
