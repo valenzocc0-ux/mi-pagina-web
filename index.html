@@ -138,32 +138,6 @@
       color: #000000;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
-    /* Ocultar el cursor por defecto en computadoras */
-    @media (pointer: fine) {
-      body, a, .handle, .profile-circle {
-        cursor: none !important;
-      }
-      
-      .custom-cursor-dot,
-      .custom-cursor-outline {
-        display: block;
-      }
-    }
-
-    /* PUNTITO NEGRO CENTRAL: pequeño y exacto */
-    .custom-cursor-dot {
-      display: none;
-      width: 5px;
-      height: 5px;
-      background-color: #000000;
-      border-radius: 50%;
-      position: fixed;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      box-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
-    }
-
     /* ARO CELESTE: solo línea exterior, sin relleno oscuro */
     .custom-cursor-outline {
       display: none;
@@ -217,8 +191,7 @@
         </a>
       </div>
       <!-- Puntero interactivo personalizado -->
-  <div class="custom-cursor-dot"></div>
-  <div class="custom-cursor-outline"></div>
+
 <script>
     /* =========================================================
        1. EFECTO MAGNÉTICO + TILT EN LOS BOTONES
@@ -295,51 +268,6 @@
     document.addEventListener('mousemove', (e) => {
       document.body.style.backgroundImage = `radial-gradient(circle 220px at ${e.clientX}px ${e.clientY}px, rgba(0, 210, 255, 0.45), transparent 80%), url('nuevatextura.jpg')`;
     });
-    /* =========================================================
-       4. PUNTERO INTERACTIVO PERSONALIZADO
-       ========================================================= */
-    const cursorDot = document.querySelector('.custom-cursor-dot');
-    const cursorOutline = document.querySelector('.custom-cursor-outline');
-
-    if (cursorDot && cursorOutline) {
-      let posX = 0, posY = 0; // Posición real del mouse
-      let outlineX = 0, outlineY = 0; // Posición con inercia del aro
-
-      document.addEventListener('mousemove', (e) => {
-        posX = e.clientX;
-        posY = e.clientY;
-        
-        // El punto sigue al mouse inmediatamente
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
-      });
-
-      // Animación elástica del aro exterior (render loop)
-      const animateOutline = () => {
-        // Calculamos el retraso/suavizado (0.15 controla la elasticidad)
-        outlineX += (posX - outlineX) * 0.15;
-        outlineY += (posY - outlineY) * 0.15;
-
-        cursorOutline.style.left = `${outlineX}px`;
-        cursorOutline.style.top = `${outlineY}px`;
-
-        requestAnimationFrame(animateOutline);
-      };
-      requestAnimationFrame(animateOutline);
-
-      // Detectamos cuando entra/sale de elementos interactivos
-      const interactiveElements = document.querySelectorAll('.btn-link, .handle, .profile-circle');
-      
-      interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cursorDot.classList.add('hover-active');
-          cursorOutline.classList.add('hover-active');
-        });
-        el.addEventListener('mouseleave', () => {
-          cursorDot.classList.remove('hover-active');
-          cursorOutline.classList.remove('hover-active');
-        });
-      });
     }
   </script>
 </body>
