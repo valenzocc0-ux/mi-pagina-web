@@ -23,7 +23,12 @@
   100% {
     transform: translateY(0px);
   }
-}
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-image: url('nuevatextura.jpg');
@@ -36,8 +41,9 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      overflow: hidden; /* Evita scrolls raros */
       perspective: 1000px; /* Habilita el espacio 3D */
+      position: relative;
     }
 .glass-card {
       width: 100%;
@@ -186,7 +192,7 @@
 
     .glass-card {
       position: relative;
-      z-index: 2; /* Asegura que la tarjeta quede por encima del canvas */
+      z-index: 10; /* Asegura que la tarjeta quede por encima del canvas */
     }
 </style>
 </head>
