@@ -138,6 +138,58 @@
       color: #000000;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
+    /* Ocultar cursor nativo en pantallas con puntero */
+    @media (pointer: fine) {
+      body, a, .handle {
+        cursor: none !important;
+      }
+      
+      .custom-cursor-dot,
+      .custom-cursor-outline {
+        display: block;
+      }
+    }
+    /* Puntero personalizado (punto central) */
+    .custom-cursor-dot {
+      display: none;
+      width: 6px;
+      height: 6px;
+      background-color: #38bdf8;
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Aro elástico que lo sigue */
+    .custom-cursor-outline {
+      display: none;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9998;
+      /* Se mueve con inercia elástica desde JS */
+      transition: transform 0.08s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Estado expandido cuando pasa por elementos interactivos */
+    .custom-cursor-dot.hover-active {
+      width: 4px;
+      height: 4px;
+      background-color: #ffffff;
+    }
+
+    .custom-cursor-outline.hover-active {
+      width: 48px;
+      height: 48px;
+      border-color: rgba(56, 189, 248, 0.8);
+      background-color: rgba(56, 189, 248, 0.08);
     }
 </style>
 </head>
@@ -168,6 +220,9 @@
           <span>LinkedIn</span>
         </a>
       </div>
+      <!-- Puntero interactivo personalizado -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-outline"></div>
 <script>
     /* =========================================================
        1. EFECTO MAGNÉTICO + TILT EN LOS BOTONES
@@ -244,6 +299,52 @@
     document.addEventListener('mousemove', (e) => {
       document.body.style.backgroundImage = `radial-gradient(circle 220px at ${e.clientX}px ${e.clientY}px, rgba(0, 210, 255, 0.45), transparent 80%), url('nuevatextura.jpg')`;
     });
+    /* =========================================================
+       4. PUNTERO INTERACTIVO PERSONALIZADO
+       ========================================================= */
+    const cursorDot = document.querySelector('.custom-cursor-dot');
+    const cursorOutline = document.querySelector('.custom-cursor-outline');
+
+    if (cursorDot && cursorOutline) {
+      let posX = 0, posY = 0; // Posición real del mouse
+      let outlineX = 0, outlineY = 0; // Posición con inercia del aro
+
+      document.addEventListener('mousemove', (e) => {
+        posX = e.clientX;
+        posY = e.clientY;
+        
+        // El punto sigue al mouse inmediatamente
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+      });
+
+      // Animación elástica del aro exterior (render loop)
+      const animateOutline = () => {
+        // Calculamos el retraso/suavizado (0.15 controla la elasticidad)
+        outlineX += (posX - outlineX) * 0.15;
+        outlineY += (posY - outlineY) * 0.15;
+
+        cursorOutline.style.left = `${outlineX}px`;
+        cursorOutline.style.top = `${outlineY}px`;
+
+        requestAnimationFrame(animateOutline);
+      };
+      requestAnimationFrame(animateOutline);
+
+      // Detectamos cuando entra/sale de elementos interactivos
+      const interactiveElements = document.querySelectorAll('.btn-link, .handle, .profile-circle');
+      
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.classList.add('hover-active');
+          cursorOutline.classList.add('hover-active');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorDot.classList.remove('hover-active');
+          cursorOutline.classList.remove('hover-active');
+        });
+      });
+    }
   </script>
 </body>
 </html>
