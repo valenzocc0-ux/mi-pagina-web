@@ -208,7 +208,7 @@
 
 <script>
     /* =========================================================
-       1. EFECTO MAGNÉTICO + TILT EN LOS BOTONES
+       1. EFECTO MAGNÉTICO + TILT 3D EN LOS BOTONES
        ========================================================= */
     const buttons = document.querySelectorAll('.btn-link');
 
@@ -218,11 +218,11 @@
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        // Atracción magnética: desplazamiento de hasta ~10px hacia el cursor
+        // Desplazamiento elástico hacia el cursor
         const pullX = (x / (rect.width / 2)) * 8;
         const pullY = (y / (rect.height / 2)) * 6;
 
-        // Inclinación 3D
+        // Inclinación 3D en los ejes
         const rotateX = -(y / (rect.height / 2)) * 8;
         const rotateY = (x / (rect.width / 2)) * 12;
 
@@ -230,16 +230,15 @@
       });
 
       btn.addEventListener('mouseleave', () => {
-        // Vuelve suave a su posición de reposo
         btn.style.transform = 'perspective(500px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1)';
       });
     });
-/* =========================================================
-       2. EFECTO SCRAMBLE TEXT (MÁS SUAVE Y PROGRESIVO)
+
+    /* =========================================================
+       2. EFECTO SCRAMBLE TEXT (DESENCRIPTADO SUAVE)
        ========================================================= */
     const handleEl = document.querySelector('.handle');
     if (handleEl) {
-      // Usamos caracteres más sutiles y limpios
       const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       const originalText = handleEl.innerText;
       let interval = null;
@@ -264,15 +263,11 @@
             clearInterval(interval);
           }
 
-          // Avance más lento: cada letra se resuelve gradualmente
-          iteration += 1 / 4; 
-        }, 45); // Cadencia más pausada (45ms)
+          iteration += 1 / 4;
+        }, 45);
       };
 
-      // Disparo al pasar el cursor
       handleEl.addEventListener('mouseenter', runScramble);
-
-      // Disparo inicial tras cargar la página
       setTimeout(runScramble, 800);
     }
 
@@ -282,7 +277,7 @@
     document.addEventListener('mousemove', (e) => {
       document.body.style.backgroundImage = `radial-gradient(circle 220px at ${e.clientX}px ${e.clientY}px, rgba(0, 210, 255, 0.45), transparent 80%), url('nuevatextura.jpg')`;
     });
-    }
   </script>
+</script>
 </body>
 </html>
