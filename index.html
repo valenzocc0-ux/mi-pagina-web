@@ -423,6 +423,68 @@
         display: none; /* Dejamos la esquina limpia en móviles */
       }
     }
+    /* =========================================================
+       AMBIENT GLOWING ORBS
+       ========================================================= */
+    .ambient-light-container {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1; /* Detrás de la tarjeta (que tiene z-index: 10) */
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      will-change: transform;
+    }
+
+    /* Orbe 1: Cian Neón */
+    .orb-1 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.7) 0%, rgba(14, 165, 233, 0.2) 65%, transparent 100%);
+      top: 20%;
+      left: 25%;
+      animation: float-orb-1 14s ease-in-out infinite alternate;
+    }
+
+    /* Orbe 2: Azul Eléctrico / Violeta Profundo */
+    .orb-2 {
+      width: 440px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.6) 0%, rgba(59, 130, 246, 0.15) 70%, transparent 100%);
+      bottom: 15%;
+      right: 25%;
+      animation: float-orb-2 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes float-orb-1 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(120px, 60px) scale(1.15);
+      }
+      100% {
+        transform: translate(-60px, 110px) scale(0.9);
+      }
+    }
+
+    @keyframes float-orb-2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-100px, -80px) scale(1.1);
+      }
+      100% {
+        transform: translate(80px, -40px) scale(0.95);
+      }
+    }
   </style>
 </head>
 <body>
@@ -447,6 +509,11 @@
       <span class="hud-text">PORTFOLIO // V2.4</span>
     </div>
   </aside>
+  <!-- Orbes de luz ambiental de fondo -->
+  <div class="ambient-light-container" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
   <!-- Tarjeta Principal -->
   <div class="glass-card">
     <div class="profile-circle" id="openProfileBtn" title="Ver información">
