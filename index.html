@@ -522,6 +522,33 @@
       
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    /* =========================================================
+       DYNAMIC GLASS GLARE
+       ========================================================= */
+    .glass-card {
+      position: relative;
+      overflow: hidden; /* Clave para que el reflejo no se salga de las esquinas redondeadas */
+    }
+
+    .glass-glare {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3; /* Por encima del fondo de la tarjeta, por debajo del contenido interactivo */
+      background: radial-gradient(
+        circle 220px at var(--glare-x, 0%) var(--glare-y, 0%), 
+        rgba(255, 255, 255, 0.12) 0%, 
+        rgba(255, 255, 255, 0.03) 50%, 
+        transparent 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Al pasar el mouse por la tarjeta, el reflejo se vuelve visible */
+    .glass-card:hover .glass-glare {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -555,6 +582,8 @@
   <div class="tech-grid" aria-hidden="true"></div>
   <!-- Tarjeta Principal -->
   <div class="glass-card">
+    <!-- Reflejo especular de cristal -->
+    <div class="glass-glare"></div>
     <div class="profile-circle" id="openProfileBtn" title="Ver información">
       <img src="foto.jpg" alt="Valentino Zocco Telleria" />
     </div>
@@ -703,6 +732,30 @@
         const xOffset = (e.clientX / window.innerWidth - 0.5) * 14;
         const yOffset = (e.clientY / window.innerHeight - 0.5) * 10;
         grid.style.transform = `perspective(600px) rotateX(${25 - yOffset}deg) rotateY(${xOffset}deg) translateY(-10%)`;
+      });
+    }
+    /* =========================================================
+       REFLEJO ESPECULAR DINÁMICO (GLASS GLARE)
+       ========================================================= */
+    const card = document.querySelector('.glass-card');
+    const glare = document.querySelector('.glass-glare');
+
+    if (card && glare) {
+      card.addEventListener('mousemove', (e) => {
+        // Obtenemos la posición del cursor relativa a la tarjeta
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Pasamos las coordenadas a variables de CSS
+        card.style.setProperty('--glare-x', `${x}px`);
+        card.style.setProperty('--glare-y', `${y}px`);
+      });
+
+      // Efecto de desvanecimiento suave al salir de la tarjeta
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--glare-x', `0px`);
+        card.style.setProperty('--glare-y', `0px`);
       });
     }
   </script>
