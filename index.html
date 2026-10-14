@@ -672,6 +672,77 @@
         0 0 50px rgba(37, 211, 102, 0.6),       /* Aura gigante */
         0 0 90px rgba(37, 211, 102, 0.25);      /* Dispersión extra */
     }
+    /* =========================================================
+       BADGE DE INGENIERÍA (SOBREESCRITURA SEGURA)
+       ========================================================= */
+    .handle-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      margin: 14px auto 22px auto !important;
+      padding: 7px 16px !important;
+      
+      background: rgba(11, 20, 38, 0.55) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      
+      border: 1px solid rgba(56, 189, 248, 0.25) !important;
+      border-radius: 12px !important;
+      
+      box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 18px rgba(56, 189, 248, 0.12) !important;
+      
+      cursor: default !important;
+      user-select: none !important;
+      transform-origin: center center !important;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.22s ease,
+                  box-shadow 0.22s ease !important;
+    }
+
+    .badge-cross {
+      font-size: 0.72rem !important;
+      font-weight: 300 !important;
+      color: #38bdf8 !important;
+      opacity: 0.7 !important;
+      font-family: monospace !important;
+      user-select: none !important;
+      line-height: 1 !important;
+      transition: opacity 0.2s ease, text-shadow 0.2s ease !important;
+    }
+
+    .handle-text {
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 2.2px !important;
+      text-transform: uppercase !important;
+      color: #f8fafc !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+      transition: color 0.2s ease !important;
+    }
+
+    /* Interacción Hover segura */
+    .handle-badge:hover {
+      transform: scale(1.04) !important;
+      border-color: rgba(56, 189, 248, 0.65) !important;
+      box-shadow: 
+        0 6px 22px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 0 24px rgba(56, 189, 248, 0.4) !important;
+    }
+
+    .handle-badge:hover .badge-cross {
+      opacity: 1 !important;
+      text-shadow: 0 0 8px #38bdf8 !important;
+    }
+
+    .handle-badge:hover .handle-text {
+      color: #ffffff !important;
+    }
   </style>
 </head>
 <body>
@@ -711,7 +782,12 @@
       <img src="foto.jpg" alt="Valentino Zocco Telleria" />
     </div>
 
-    <div class="handle">VALENTINO ZOCCO TELLERIA</div>
+    <!-- Badge de Ingeniería: Nombre -->
+      <div class="handle-badge">
+        <span class="badge-cross" aria-hidden="true">+</span>
+        <span class="handle-text">VALENTINO ZOCCO TELLERIA</span>
+        <span class="badge-cross" aria-hidden="true">+</span>
+      </div>
 
     <div class="links-list">
       <a href="https://www.instagram.com/valenzocco/" class="btn-link" target="_blank" rel="noopener noreferrer">
