@@ -328,10 +328,125 @@
     .btn-cv:hover svg {
       transform: translateY(3px);
     }
+    /* =========================================================
+       HUD / INTERFACE FRAME
+       ========================================================= */
+    .hud-frame {
+      position: fixed;
+      inset: 0;
+      pointer-events: none; /* No bloquea clics en la tarjeta ni en el fondo */
+      z-index: 50;
+      padding: 24px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      box-sizing: border-box;
+      font-family: 'Poppins', monospace, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1.2px;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .hud-corner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hud-top-left {
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .hud-top-right {
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+
+    .hud-bottom-left {
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+
+    .hud-bottom-right {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    /* Isotipo VZ */
+    .hud-badge {
+      display: inline-block;
+      font-weight: 700;
+      color: #38bdf8;
+      letter-spacing: 2px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Reloj dinámico */
+    .hud-clock {
+      color: rgba(255, 255, 255, 0.85);
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+
+    .hud-separator {
+      color: rgba(56, 189, 248, 0.5);
+    }
+    /* Punto de estado activo */
+    .hud-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    /* Adaptación para pantallas de celular */
+    @media (max-width: 640px) {
+      .hud-frame {
+        padding: 14px 16px;
+        font-size: 0.68rem;
+      }
+      .hud-bottom-right {
+        display: none; /* Dejamos la esquina limpia en móviles */
+      }
+    }
   </style>
 </head>
 <body>
+<!-- Marco Perimetral HUD -->
+  <aside class="hud-frame" aria-label="Información de interfaz">
+    <div class="hud-corner hud-top-left">
+      <span class="hud-badge">[ VZ ]</span>
+    </div>
 
+    <div class="hud-corner hud-top-right">
+      <span class="hud-location">Tandil, AR</span>
+      <span class="hud-separator">•</span>
+      <span id="hud-clock" class="hud-clock">00:00:00</span>
+    </div>
+
+    <div class="hud-corner hud-bottom-left">
+      <span class="hud-status-dot"></span>
+      <span class="hud-text">STATUS: AVAILABLE</span>
+    </div>
+
+    <div class="hud-corner hud-bottom-right">
+      <span class="hud-text">PORTFOLIO // V2.4</span>
+    </div>
+  </aside>
   <!-- Tarjeta Principal -->
   <div class="glass-card">
     <div class="profile-circle" id="openProfileBtn" title="Ver información">
@@ -461,6 +576,20 @@
         }
       });
     }
+    /* =========================================================
+       4. RELOJ HUD EN TIEMPO REAL
+       ========================================================= */
+    const clockEl = document.getElementById('hud-clock');
+    function updateClock() {
+      if (!clockEl) return;
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
