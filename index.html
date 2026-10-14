@@ -622,43 +622,55 @@
       animation-delay: 0.88s;
     }
     /* =========================================================
-       GLOW PERSONALIZADO POR BOTÓN AL HACER HOVER (PASO 3)
+       GLOW PERSONALIZADO INTENSO POR BOTÓN AL HACER HOVER (PASO 3)
        ========================================================= */
 
     /* Estilo base de transición para todos los botones de enlaces */
     .btn-link {
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
                   background-color 0.25s ease, 
-                  box-shadow 0.25s ease, 
-                  border-color 0.25s ease;
-      border: 1px solid transparent; /* Preparar borde para el hover */
+                  box-shadow 0.28s ease, 
+                  border-color 0.28s ease,
+                  color 0.25s ease;
+      border: 1.5px solid transparent; /* Bordes más marcados para que resalten */
     }
 
-    /* 1. Efecto Hover para Instagram */
+    /* 1. Efecto Hover para Instagram (Resplandor degradado cálido/rosa de alta potencia) */
     .btn-link[href*="instagram.com"]:hover,
     .btn-link[href*="ig.me"]:hover {
       background-color: #ffffff;
-      border-color: rgba(225, 48, 108, 0.3);
+      color: #e1306c !important; /* El texto se tiñe del color de la red */
+      border-color: rgba(225, 48, 108, 0.7);
       box-shadow: 
-        0 8px 24px rgba(225, 48, 108, 0.25),   /* Brillo rosa-magenta */
-        0 0 16px rgba(253, 29, 29, 0.15);      /* Destello naranja-rojo */
+        0 0 10px rgba(225, 48, 108, 0.4),      /* Brillo cercano intenso */
+        0 8px 25px rgba(225, 48, 108, 0.45),    /* Sombra de apoyo */
+        0 0 45px rgba(225, 48, 108, 0.5),      /* Aura gigante de fondo */
+        0 0 70px rgba(253, 29, 2 red, 0.2);     /* Desparramo extra cálido de luz */
     }
 
-    /* 2. Efecto Hover para LinkedIn */
+    /* 2. Efecto Hover para LinkedIn (Aura azul eléctrico súper brillante) */
     .btn-link[href*="linkedin.com"]:hover {
       background-color: #ffffff;
-      border-color: rgba(0, 119, 181, 0.35);
+      color: #0077b5 !important; /* El texto se tiñe del color de la red */
+      border-color: rgba(0, 119, 181, 0.85);
       box-shadow: 
-        0 8px 24px rgba(0, 119, 181, 0.3);     /* Brillo azul corporativo */
+        0 0 12px rgba(0, 119, 181, 0.55),      /* Brillo cercano de alta intensidad */
+        0 8px 25px rgba(0, 119, 181, 0.4),      /* Sombra de apoyo */
+        0 0 50px rgba(0, 119, 181, 0.55),      /* Aura gigante */
+        0 0 85px rgba(56, 189, 248, 0.25);     /* Extensión cian extra */
     }
 
-    /* 3. Efecto Hover para WhatsApp */
+    /* 3. Efecto Hover para WhatsApp (Aura verde esmeralda encendida) */
     .btn-link[href*="wa.me"]:hover,
     .btn-link[href*="whatsapp.com"]:hover {
       background-color: #ffffff;
-      border-color: rgba(37, 211, 102, 0.4);
+      color: #25d366 !important; /* El texto se tiñe del color de la red */
+      border-color: rgba(37, 211, 102, 0.9);
       box-shadow: 
-        0 8px 24px rgba(37, 211, 102, 0.28);    /* Brillo verde WhatsApp */
+        0 0 12px rgba(37, 211, 102, 0.55),     /* Brillo cercano de alta intensidad */
+        0 8px 25px rgba(37, 211, 102, 0.35),     /* Sombra de apoyo */
+        0 0 50px rgba(37, 211, 102, 0.6),       /* Aura gigante */
+        0 0 90px rgba(37, 211, 102, 0.25);      /* Dispersión extra */
     }
   </style>
 </head>
