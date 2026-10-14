@@ -485,6 +485,33 @@
         transform: translate(80px, -40px) scale(0.95);
       }
     }
+    /* =========================================================
+       CUADRÍCULA TECNOLÓGICA 3D (BLUEPRINT GRID)
+       ========================================================= */
+    .tech-grid {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      z-index: 2; /* Por encima de los orbes pero detrás de la tarjeta */
+      
+      /* Grilla milimétrica semitransparente que deja ver tu fondo */
+      background-size: 55px 55px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+      
+      /* Perspectiva y ángulo tridimensional */
+      transform: perspective(600px) rotateX(25deg) translateY(-10%);
+      transform-origin: center center;
+
+      /* Máscara radial: se desvanece suave hacia los bordes y el centro */
+      -webkit-mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.85) 0%, transparent 65%);
+      mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.85) 0%, transparent 65%);
+      
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
   </style>
 </head>
 <body>
@@ -514,6 +541,8 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
   </div>
+  <!-- Malla / Cuadrícula técnica de fondo -->
+  <div class="tech-grid" aria-hidden="true"></div>
   <!-- Tarjeta Principal -->
   <div class="glass-card">
     <div class="profile-circle" id="openProfileBtn" title="Ver información">
@@ -657,6 +686,15 @@
     }
     updateClock();
     setInterval(updateClock, 1000);
+    /* Reactividad 3D de la cuadrícula con el cursor */
+    const grid = document.querySelector('.tech-grid');
+    if (grid) {
+      document.addEventListener('mousemove', (e) => {
+        const xOffset = (e.clientX / window.innerWidth - 0.5) * 14;
+        const yOffset = (e.clientY / window.innerHeight - 0.5) * 10;
+        grid.style.transform = `perspective(600px) rotateX(${25 - yOffset}deg) rotateY(${xOffset}deg) translateY(-10%)`;
+      });
+    }
   </script>
 </body>
 </html>
