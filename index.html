@@ -621,6 +621,45 @@
       animation: cinematicEntrance 1s cubic-bezier(0.19, 1, 0.22, 1) both;
       animation-delay: 0.88s;
     }
+    /* =========================================================
+       GLOW PERSONALIZADO POR BOTÓN AL HACER HOVER (PASO 3)
+       ========================================================= */
+
+    /* Estilo base de transición para todos los botones de enlaces */
+    .btn-link {
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background-color 0.25s ease, 
+                  box-shadow 0.25s ease, 
+                  border-color 0.25s ease;
+      border: 1px solid transparent; /* Preparar borde para el hover */
+    }
+
+    /* 1. Efecto Hover para Instagram */
+    .btn-link[href*="instagram.com"]:hover,
+    .btn-link[href*="ig.me"]:hover {
+      background-color: #ffffff;
+      border-color: rgba(225, 48, 108, 0.3);
+      box-shadow: 
+        0 8px 24px rgba(225, 48, 108, 0.25),   /* Brillo rosa-magenta */
+        0 0 16px rgba(253, 29, 29, 0.15);      /* Destello naranja-rojo */
+    }
+
+    /* 2. Efecto Hover para LinkedIn */
+    .btn-link[href*="linkedin.com"]:hover {
+      background-color: #ffffff;
+      border-color: rgba(0, 119, 181, 0.35);
+      box-shadow: 
+        0 8px 24px rgba(0, 119, 181, 0.3);     /* Brillo azul corporativo */
+    }
+
+    /* 3. Efecto Hover para WhatsApp */
+    .btn-link[href*="wa.me"]:hover,
+    .btn-link[href*="whatsapp.com"]:hover {
+      background-color: #ffffff;
+      border-color: rgba(37, 211, 102, 0.4);
+      box-shadow: 
+        0 8px 24px rgba(37, 211, 102, 0.28);    /* Brillo verde WhatsApp */
+    }
   </style>
 </head>
 <body>
