@@ -184,11 +184,23 @@
       border: 2px solid rgba(132, 182, 244, 0.5);
       box-shadow: 0 0 15px rgba(132, 182, 244, 0.3);
       
-      /* Anti-aliasing y forzado de alta calidad en la imagen */
-      image-rendering: high-quality;
-      -webkit-backface-visibility: hidden;
+      /* =========================================================
+         CORRECCIÓN DE PIXELADO POR SUB-ESCALADO (ACHICADO)
+         ========================================================= */
+      image-rendering: -webkit-optimize-contrast; /* Fuerza el mejor contraste */
+      image-rendering: auto;                      /* Algoritmo de suavizado estándar */
+      
+      /* Forza a que la tarjeta gráfica use anti-aliasing */
+      transform: translate3d(0, 0, 0); 
+      -webkit-transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
-      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      
+      /* Aplica un suavizado sutil de bordes */
+      filter: blur(0px) contrast(1.02); 
+      
+      /* Evita el parpadeo y la pérdida de subpíxeles */
+      -webkit-font-smoothing: subpixel-antialiased;
     }
 
     /* =========================================================
