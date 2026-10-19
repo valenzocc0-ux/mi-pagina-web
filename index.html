@@ -143,8 +143,8 @@
       }
     }
 
-    /* =========================================================
-       AVATAR NEUMÓRFICO ENCASTRADO
+/* =========================================================
+       AVATAR NEUMÓRFICO ENCASTRADO (CORRECCIÓN ANTI-PIXELADO)
        ========================================================= */
     .avatar-wrapper {
       width: 110px;
@@ -157,16 +157,18 @@
       align-items: center;
       justify-content: center;
       
-      /* Pozo interior donde descansa la foto */
       box-shadow: 
         inset -5px -5px 12px var(--shadow-light),
         inset  5px  5px 12px var(--shadow-dark);
       
-      transition: transform 0.3s ease;
+      /* Aceleración por hardware para transiciones suaves */
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
 
     .avatar-wrapper:hover {
-      transform: scale(1.03);
+      /* Forzamos el renderizado 3D con translateZ(0) para evitar que se desenfoque al escalar */
+      transform: scale(1.04) translateZ(0);
     }
 
     .avatar-img {
@@ -175,8 +177,16 @@
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      border: 2px solid rgba(56, 189, 248, 0.35);
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+      
+      /* Ajuste de borde para combinar con la nueva paleta clara */
+      border: 2px solid rgba(132, 182, 244, 0.5);
+      box-shadow: 0 0 15px rgba(132, 182, 244, 0.3);
+      
+      /* Anti-aliasing y forzado de alta calidad en la imagen */
+      image-rendering: high-quality;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     /* =========================================================
