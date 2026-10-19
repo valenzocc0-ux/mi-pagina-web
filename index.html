@@ -204,50 +204,28 @@
     }
 
  /* =========================================================
-       BADGE DE NOMBRE: SURCO HUNDIDO CON LED
+       NOMBRE ESCULPIDO LETRA POR LETRA (SIN CARD)
        ========================================================= */
-    .handle-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 8px auto 26px auto;
-      padding: 10px 22px;
-      background: var(--bg-base);
-      border-radius: 20px;
-      
-      /* Sombra INSET: Crea el efecto de estar tallado hacia adentro */
-      box-shadow: 
-        inset -4px -4px 8px var(--shadow-light),
-        inset  4px  4px 10px var(--shadow-dark);
-      
-      cursor: default;
-      user-select: none;
-    }
-
-    /* Micro-LED de estado */
-    .status-indicator {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background-color: var(--accent-cyan);
-      box-shadow: 0 0 8px var(--accent-cyan-glow);
-      animation: ledPulse 2s infinite alternate ease-in-out;
-    }
-
-    @keyframes ledPulse {
-      0% { opacity: 0.4; box-shadow: 0 0 2px var(--accent-cyan); }
-      100% { opacity: 1; box-shadow: 0 0 12px var(--accent-cyan); }
-    }
-
-    .handle-text {
-      font-size: 0.82rem;
-      font-weight: 700;
+    .engraved-name {
+      margin: 16px auto 30px auto;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 800;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #ffffff;
-      /* Un brillo blanco sutil para que el texto resalte desde el fondo del surco */
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.15); 
+      
+      /* El color de la letra simula la profundidad del surco (azul casi negro) */
+      color: rgba(0, 20, 40, 0.65); 
+      
+      /* La magia del grabado táctil: 
+         1. Luz sutil que rebota en el borde inferior del corte
+         2. Sombra dura que proyecta el borde superior */
+      text-shadow: 
+        1px 1px 1px rgba(255, 255, 255, 0.28),
+       -1px -1px 1px rgba(0, 15, 30, 0.7);
+       
+      user-select: none;
+      cursor: default;
     }
 
     /* =========================================================
@@ -394,10 +372,9 @@
       <img src="foto.jpg" alt="Foto de perfil de Valentino Zocco Telleria" class="avatar-img" />
     </div>
 
- <!-- Badge de Nombre: Surco Hundido -->
-    <div class="handle-badge">
-      <span class="status-indicator" aria-hidden="true"></span>
-      <span class="handle-text">VALENTINO ZOCCO TELLERIA</span>
+ <!-- Nombre Esculpido Letra por Letra (Sin cápsula) -->
+    <div class="engraved-name">
+      VALENTINO ZOCCO TELLERIA
     </div>
 
     <!-- Lista de Enlaces Táctiles -->
