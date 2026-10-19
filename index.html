@@ -203,49 +203,51 @@
       -webkit-font-smoothing: subpixel-antialiased;
     }
 
-    /* =========================================================
-       BADGE DE NOMBRE TÁCTIL
+ /* =========================================================
+       BADGE DE NOMBRE: SURCO HUNDIDO CON LED
        ========================================================= */
     .handle-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       margin: 8px auto 26px auto;
-      padding: 9px 18px;
+      padding: 10px 22px;
       background: var(--bg-base);
-      border-radius: 16px;
+      border-radius: 20px;
       
-      /* Relieve exterior suave */
+      /* Sombra INSET: Crea el efecto de estar tallado hacia adentro */
       box-shadow: 
-        -4px -4px 10px var(--shadow-light),
-         4px  4px 12px var(--shadow-dark);
+        inset -4px -4px 8px var(--shadow-light),
+        inset  4px  4px 10px var(--shadow-dark);
       
       cursor: default;
       user-select: none;
-      transition: all 0.25s ease;
     }
 
-    .handle-badge:hover {
-      box-shadow: 
-        -5px -5px 14px var(--shadow-light),
-         5px  5px 16px var(--shadow-dark),
-         0 0 16px var(--accent-cyan-glow);
+    /* Micro-LED de estado */
+    .status-indicator {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan-glow);
+      animation: ledPulse 2s infinite alternate ease-in-out;
     }
 
-    .badge-cross {
-      font-size: 0.75rem;
-      color: var(--accent-cyan);
-      opacity: 0.8;
-      font-family: monospace;
+    @keyframes ledPulse {
+      0% { opacity: 0.4; box-shadow: 0 0 2px var(--accent-cyan); }
+      100% { opacity: 1; box-shadow: 0 0 12px var(--accent-cyan); }
     }
 
     .handle-text {
       font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: #ffffff;
+      /* Un brillo blanco sutil para que el texto resalte desde el fondo del surco */
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.15); 
     }
 
     /* =========================================================
@@ -392,11 +394,10 @@
       <img src="foto.jpg" alt="Foto de perfil de Valentino Zocco Telleria" class="avatar-img" />
     </div>
 
-    <!-- Badge de Ingeniería -->
+ <!-- Badge de Nombre: Surco Hundido -->
     <div class="handle-badge">
-      <span class="badge-cross" aria-hidden="true">+</span>
+      <span class="status-indicator" aria-hidden="true"></span>
       <span class="handle-text">VALENTINO ZOCCO TELLERIA</span>
-      <span class="badge-cross" aria-hidden="true">+</span>
     </div>
 
     <!-- Lista de Enlaces Táctiles -->
