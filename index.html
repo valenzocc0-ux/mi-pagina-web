@@ -1,176 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Valentino Zocco Telleria — Portfolio</title>
-<!-- Favicon SVG Neumórfico -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23005187'/><text x='50' y='68' font-family='sans-serif' font-weight='bold' font-size='46' letter-spacing='-2' fill='%2384b6f4' text-anchor='middle'>VZ</text></svg>" type="image/svg+xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Valentino Zocco Telleria | Portfolio</title>
   
-  <!-- Fuente técnica Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Favicon SVG -->
+  <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%23005187"/><text x="50%" y="50%" font-family="Arial, sans-serif" font-size="45" font-weight="bold" fill="%2384b6f4" dominant-baseline="central" text-anchor="middle">VZ</text></svg>'>
   
-  <!-- FontAwesome para íconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+  <!-- Font Awesome para los íconos -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
   <style>
-    /* =========================================================
-       VARIABLES Y PALETA NEUMÓRFICA
-       ========================================================= */
-  :root {
-      --bg-base: #005187;                       /* Azul principal elegido */
-      --shadow-light: rgba(255, 255, 255, 0.22);/* Luz superior reflejada */
-      --shadow-dark: rgba(0, 32, 60, 0.75);     /* Sombra profunda azul noche */
-      --accent-cyan: #84b6f4;                   /* Acento claro de tu paleta */
-      --accent-cyan-glow: rgba(132, 182, 244, 0.45);
-      --text-main: #ffffff;
-      --text-muted: #c4dafa;                    /* Azul hielo suave para datos secundarios */
+    :root {
+      --bg-base: #005187;
+      --shadow-light: rgba(255, 255, 255, 0.15);
+      --shadow-dark: rgba(0, 0, 0, 0.4);
+      --accent-cyan: #84b6f4;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* =========================================================
-       BLOQUEO TOTAL RESPONSIVE (CELULAR Y PC)
-       ========================================================= */
-    html, body {
-      width: 100%;
-      height: 100%;
-      max-width: 100vw;
-      overflow: hidden;
-      position: fixed;
-      touch-action: pan-y;
-      background-color: var(--bg-base);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text-main);
-    }
-
     body {
+      background-color: var(--bg-base);
+      color: #ffffff;
+      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100dvh;
-      padding: 16px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
     }
 
     /* =========================================================
-       MARCO HUD PERIMETRAL
+       HUD OVERLAY (Textos de fondo)
        ========================================================= */
-    .hud-frame {
-      position: fixed;
-      inset: 0;
+    .hud-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px 30px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      z-index: 1;
+    }
+    .hud-text {
+      position: absolute;
+      font-family: monospace;
       font-size: 0.75rem;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 2px;
       text-transform: uppercase;
-      animation: fadeInHUD 1.2s ease forwards;
     }
-
-    .hud-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .hud-tag {
-      color: var(--accent-cyan);
-      font-weight: 700;
-    }
+    .hud-top-left { top: 24px; left: 24px; }
+    .hud-top-right { top: 24px; right: 24px; }
+    .hud-bottom-left { bottom: 24px; left: 24px; }
+    .hud-bottom-right { bottom: 24px; right: 24px; }
 
     .status-dot {
       display: inline-block;
-      width: 7px;
-      height: 7px;
+      width: 6px; height: 6px;
+      background-color: #00ff88;
       border-radius: 50%;
-      background-color: #10b981;
-      box-shadow: 0 0 10px #10b981;
-      margin-right: 6px;
-      animation: pulseDot 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    @keyframes fadeInHUD {
-      from { opacity: 0; }
-      to { opacity: 0.85; }
+      margin-right: 8px;
+      box-shadow: 0 0 8px #00ff88;
     }
 
     /* =========================================================
-       TARJETA PRINCIPAL NEUMÓRFICA (EXTRUIDA DEL FONDO)
+       TARJETA NEUMÓRFICA PRINCIPAL
        ========================================================= */
     .neumorphic-card {
-      width: 100%;
+      width: 90%;
       max-width: 400px;
       background: var(--bg-base);
       border-radius: 36px;
-      padding: 36px 28px;
+      padding: 40px 30px;
       text-align: center;
       position: relative;
       z-index: 5;
-      
-      /* Escultura Neumórfica Exterior */
       box-shadow: 
         -14px -14px 30px var(--shadow-light),
          14px  14px 35px var(--shadow-dark);
-      
-      /* Animación cinematográfica de revelación */
-      animation: revealCard 1s cubic-bezier(0.19, 1, 0.22, 1) both;
     }
 
-    @keyframes revealCard {
-      0% {
-        opacity: 0;
-        transform: translateY(24px) scale(0.97);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-/* =========================================================
-       AVATAR NEUMÓRFICO ENCASTRADO (CORRECCIÓN ANTI-PIXELADO)
+    /* =========================================================
+       AVATAR
        ========================================================= */
-    .avatar-wrapper {
+    .avatar-container {
       width: 110px;
       height: 110px;
-      margin: 0 auto 16px auto;
+      margin: 0 auto 20px auto;
       border-radius: 50%;
+      padding: 4px;
       background: var(--bg-base);
-      padding: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
       box-shadow: 
-        inset -5px -5px 12px var(--shadow-light),
-        inset  5px  5px 12px var(--shadow-dark);
-      
-      /* Aceleración por hardware para transiciones suaves */
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
-    }
-
-    .avatar-wrapper:hover {
-      /* Forzamos el renderizado 3D con translateZ(0) para evitar que se desenfoque al escalar */
-      transform: scale(1.04) translateZ(0);
+        -6px -6px 12px var(--shadow-light),
+         6px  6px 12px var(--shadow-dark);
     }
 
     .avatar-img {
@@ -179,52 +107,40 @@
       border-radius: 50%;
       object-fit: cover;
       display: block;
-      
-      /* Ajuste de borde para combinar con la nueva paleta clara */
       border: 2px solid rgba(132, 182, 244, 0.5);
       box-shadow: 0 0 15px rgba(132, 182, 244, 0.3);
       
-      /* =========================================================
-         CORRECCIÓN DE PIXELADO POR SUB-ESCALADO (ACHICADO)
-         ========================================================= */
-      image-rendering: -webkit-optimize-contrast; /* Fuerza el mejor contraste */
-      image-rendering: auto;                      /* Algoritmo de suavizado estándar */
-      
-      /* Forza a que la tarjeta gráfica use anti-aliasing */
+      /* Renderizado por hardware para evitar pixelado en móviles */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: auto;
       transform: translate3d(0, 0, 0); 
       -webkit-transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      
-      /* Aplica un suavizado sutil de bordes */
       filter: blur(0px) contrast(1.02); 
-      
-      /* Evita el parpadeo y la pérdida de subpíxeles */
       -webkit-font-smoothing: subpixel-antialiased;
     }
 
- .engraved-name {
+    /* =========================================================
+       NOMBRE ESCULPIDO (Debossed Text Blanco)
+       ========================================================= */
+    .engraved-name {
       margin: 16px auto 30px auto;
       text-align: center;
       font-size: 0.88rem;
       font-weight: 800;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      
-      /* Blanco puro para contraste total */
       color: #ffffff; 
-      
-      /* Sombra paralela suave para despegarlo del fondo */
       text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6);
-       
       user-select: none;
       cursor: default;
     }
 
     /* =========================================================
-       BOTONES NEUMÓRFICOS (SALIENTES Y HUNDIBLES)
+       BOTONES NEUMÓRFICOS
        ========================================================= */
-    .links-list {
+    .buttons-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -236,193 +152,87 @@
       justify-content: center;
       gap: 12px;
       width: 100%;
-      padding: 14px 20px;
+      padding: 16px 24px;
+      border-radius: 16px;
       background: var(--bg-base);
-      border: none;
-      outline: none;
-      border-radius: 18px;
+      color: #ffffff;
       text-decoration: none;
-      font-size: 0.92rem;
       font-weight: 600;
+      font-size: 0.95rem;
       letter-spacing: 0.5px;
-      color: var(--text-main);
-      cursor: pointer;
-      user-select: none;
-      position: relative;
-      
-      /* Relieve táctil del botón */
+      transition: all 0.2s ease-in-out;
       box-shadow: 
-        -6px -6px 14px var(--shadow-light),
-         6px  6px 16px var(--shadow-dark);
-      
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        -6px -6px 12px var(--shadow-light),
+         6px  6px 12px var(--shadow-dark);
+    }
+
+    .neumorphic-btn:active {
+      box-shadow: 
+        inset -4px -4px 8px var(--shadow-light),
+        inset  4px  4px 8px var(--shadow-dark);
+      color: var(--accent-cyan);
     }
 
     .neumorphic-btn i {
-      font-size: 1.15rem;
-      transition: transform 0.25s ease, color 0.25s ease;
+      font-size: 1.2rem;
     }
 
-    /* Estado Hover: se eleva sutilmente */
-    .neumorphic-btn:hover {
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 
-        -8px -8px 18px var(--shadow-light),
-         8px  8px 20px var(--shadow-dark);
-    }
-
-    /* Estado Active / Tap en móvil: SE HUNDE FÍSICAMENTE EN LA SUPERFICIE */
-    .neumorphic-btn:active {
-      transform: translateY(1px);
-      box-shadow: 
-        inset -5px -5px 10px var(--shadow-light),
-        inset  5px  5px 12px var(--shadow-dark);
-    }
-
-    /* Colores e identidades en Hover por red */
-    .btn-ig:hover i {
-      color: #e1306c;
-      text-shadow: 0 0 14px rgba(225, 48, 108, 0.6);
-    }
-    .btn-in:hover i {
-      color: #0077b5;
-      text-shadow: 0 0 14px rgba(0, 119, 181, 0.6);
-    }
-    .btn-wa:hover i {
-      color: #25d366;
-      text-shadow: 0 0 14px rgba(37, 211, 102, 0.6);
-    }
-
-    /* Separador sutil grabado en la superficie */
+    /* Línea separadora antes del CV */
     .divider {
-      height: 2px;
-      margin: 6px 0;
-      background: transparent;
-      box-shadow: 
-        0 1px 0 var(--shadow-light),
-        0 -1px 0 rgba(0, 0, 0, 0.5);
-    }
-
-    /* Botón CV: Acento de ingeniería cian */
-    .btn-cv {
-      color: var(--accent-cyan);
-    }
-
-    .btn-cv i {
-      color: var(--accent-cyan);
-    }
-
-    .btn-cv:hover {
-      box-shadow: 
-        -8px -8px 18px var(--shadow-light),
-         8px  8px 20px var(--shadow-dark),
-         0 0 20px rgba(56, 189, 248, 0.2);
-    }
-
-    /* =========================================================
-       CALIBRACIÓN EXACTA SMARTPHONE
-       ========================================================= */
-    @media (max-width: 640px) {
-      .hud-frame {
-        padding: 16px 18px;
-        font-size: 0.68rem;
-      }
-      .neumorphic-card {
-        padding: 28px 20px;
-        border-radius: 30px;
-      }
-      .handle-text {
-        font-size: 0.72rem;
-        letter-spacing: 1.4px;
-      }
-      .neumorphic-btn {
-        padding: 13px 18px;
-        font-size: 0.88rem;
-      }
-    }
-    /* =========================================================
-       FONDO 3D ANIMADO (SPLINE)
-       ========================================================= */
-    spline-viewer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0; /* Lo manda al fondo */
-      pointer-events: auto; /* Deja que el robot detecte el mouse */
+      height: 1px;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+      margin: 10px 0;
+      border: none;
     }
   </style>
 </head>
 <body>
-<!-- Fondo 3D Animado (Spline) -->
-  <script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.98/build/spline-viewer.js"></script>
-  <spline-viewer url="https://prod.spline.design/EN6aGjBvMXgSU01M/scene.splinecode"></spline-viewer>
-  <!-- Marco HUD de Telemetría -->
-  <aside class="hud-frame" aria-hidden="true">
-    <div class="hud-row">
-      <div class="hud-item"><span class="hud-tag">[ VZ ]</span> CORE v2.4</div>
-      <div class="hud-item" id="hudClock">TANDIL, AR &middot; --:--:--</div>
-    </div>
-    <div class="hud-row">
-      <div class="hud-item"><span class="status-dot"></span>STATUS: AVAILABLE</div>
-      <div class="hud-item">SYS // NEUMORPHIC</div>
-    </div>
-  </aside>
 
-  <!-- Tarjeta Neumórfica Central -->
-  <main class="neumorphic-card">
+  <!-- Textos de fondo (HUD) -->
+  <div class="hud-overlay">
+    <div class="hud-text hud-top-left">[ VZ ] CORE V2.4</div>
+    <div class="hud-text hud-top-right">TANDIL, AR • 21:42:41</div>
+    <div class="hud-text hud-bottom-left"><span class="status-dot"></span>STATUS: AVAILABLE</div>
+    <div class="hud-text hud-bottom-right">SYS // NEUMORPHIC</div>
+  </div>
+
+  <!-- Tarjeta principal -->
+  <div class="neumorphic-card">
     
-    <!-- Avatar encastrado -->
-    <div class="avatar-wrapper">
-      <img src="foto.jpg" alt="Foto de perfil de Valentino Zocco Telleria" class="avatar-img" />
+    <div class="avatar-container">
+      <!-- ASEGURATE DE QUE ESTE NOMBRE COINCIDA CON TU ARCHIVO DE FOTO -->
+      <img src="foto.jpg" alt="Valentino Zocco" class="avatar-img">
     </div>
 
- <!-- Nombre Esculpido Letra por Letra (Sin cápsula) -->
     <div class="engraved-name">
       VALENTINO ZOCCO TELLERIA
     </div>
 
-    <!-- Lista de Enlaces Táctiles -->
-    <nav class="links-list" aria-label="Enlaces principales">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="neumorphic-btn btn-ig">
+    <div class="buttons-container">
+      <a href="TU_LINK_DE_INSTAGRAM" class="neumorphic-btn">
         <i class="fa-brands fa-instagram"></i>
         <span>Instagram</span>
       </a>
-
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="neumorphic-btn btn-in">
+      <a href="TU_LINK_DE_LINKEDIN" class="neumorphic-btn">
         <i class="fa-brands fa-linkedin-in"></i>
         <span>LinkedIn</span>
       </a>
-
-      <a href="https://wa.me" target="_blank" rel="noopener noreferrer" class="neumorphic-btn btn-wa">
+      <a href="TU_LINK_DE_WHATSAPP" class="neumorphic-btn">
         <i class="fa-brands fa-whatsapp"></i>
         <span>WhatsApp</span>
       </a>
-
-      <div class="divider"></div>
-
-      <a href="CV Valentino Zocco Telleria.pdf" download="CV Valentino Zocco Telleria.pdf" target="_blank" rel="noopener noreferrer" class="neumorphic-btn btn-cv">
+      
+      <hr class="divider">
+      
+      <!-- DESCARGA DEL CV -->
+      <a href="EL_NOMBRE_DE_TU_ARCHIVO_EN_GITHUB.pdf" download="CV_Valentino_Zocco.pdf" class="neumorphic-btn">
         <i class="fa-solid fa-file-arrow-down"></i>
         <span>Descargar CV</span>
       </a>
-    </nav>
+    </div>
 
-  </main>
+  </div>
 
-  <!-- Reloj en vivo para el HUD -->
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('es-AR', { hour12: false });
-      const clockEl = document.getElementById('hudClock');
-      if (clockEl) {
-        clockEl.textContent = `TANDIL, AR · ${timeStr}`;
-      }
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
 </body>
 </html>
